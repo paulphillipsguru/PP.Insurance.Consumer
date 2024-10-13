@@ -12,6 +12,7 @@ if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
 }
+//DEV PURPOSE ONLY
 app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseHttpsRedirection();
 
