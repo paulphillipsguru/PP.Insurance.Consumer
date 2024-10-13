@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Modules\PP.Module.Question\PP.Module.Question.csproj" />
+    <ProjectReference Include="..\..\Modules\PP.Module.Question\PP.Module.Question.csproj" />
   </ItemGroup>
 
 </Project>
