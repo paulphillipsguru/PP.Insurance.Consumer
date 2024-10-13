@@ -6,6 +6,7 @@ A example Insurance Consumer App that will provide one or more insurance quotes 
 
 - React + Radux
 - Tailwind CSS
+- DevExpress DevExtreme (React) Components
 - .NET 9
 - SQL Server
 
