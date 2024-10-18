@@ -1,6 +1,8 @@
+import React from "react";
 import { useSelector } from "react-redux";
+import { IQuoteInfo } from "../state/info/quote-slice";
 const QuoteInfo = () => {
-  const occupationCode = useSelector((state: any) => state);
+  const occupationCode = useSelector((state: any) => state.quote) as IQuoteInfo;
 
   return (
     <>
@@ -13,8 +15,8 @@ const QuoteInfo = () => {
                 Your Occupation
               </dt>
               <dd className="mt-1 text-base leading-6 text-gray-900">
-                {occupationCode.quote.OuccaptionTitle} (
-                {occupationCode.quote.OccupationCode})
+                {occupationCode.OuccaptionTitle} (
+                {occupationCode.OccupationCode})
               </dd>
             </div>
           </dl>

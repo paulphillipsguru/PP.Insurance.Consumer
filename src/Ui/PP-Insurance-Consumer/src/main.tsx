@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import React from "react";
 import "./index.css";
 import "devextreme/dist/css/dx.light.css";
 import { store } from "./state/store";

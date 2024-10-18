@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\PP.Module.Common\PP.Module.Common.csproj" />
+    <ProjectReference Include="..\Modules\PP.Module.Question\PP.Module.Question.csproj" />
+    <ProjectReference Include="..\PP.Quotation.ServiceDefaults\PP.Quotation.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>
