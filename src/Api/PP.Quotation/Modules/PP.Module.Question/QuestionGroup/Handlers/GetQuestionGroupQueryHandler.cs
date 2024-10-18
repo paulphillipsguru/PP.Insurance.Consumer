@@ -1,5 +1,4 @@
 ﻿using PP.Module.Question.Infrastructure;
-using PP.Module.Question.Mapping;
 
 namespace PP.Module.Question.QuestionGroup.Handlers
 {

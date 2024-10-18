@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Modules\PP.Module.Common\PP.Module.Common.csproj" />
     <ProjectReference Include="..\Modules\PP.Module.Question\PP.Module.Question.csproj" />
+    <ProjectReference Include="..\Modules\PP.Module.QuoteManager\PP.Module.QuoteManager.csproj" />
     <ProjectReference Include="..\PP.Quotation.ServiceDefaults\PP.Quotation.ServiceDefaults.csproj" />
   </ItemGroup>
 

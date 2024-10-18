@@ -1,6 +1,5 @@
 ﻿using PP.Module.Question.Infrastructure;
 using PP.Module.Question.Occupation.Queries;
-using PP.Module.Question;
 using Newtonsoft.Json.Linq;
 
 namespace PP.Module.Question;
@@ -57,7 +56,7 @@ public static class ServicerRegistration
 			catch (Exception ex)
 			{
 
-				//TO DO: HANDLE EXCEPTION
+				//TODO HANDLE EXCEPTION
 				return Results.InternalServerError();
 			}
 		});
