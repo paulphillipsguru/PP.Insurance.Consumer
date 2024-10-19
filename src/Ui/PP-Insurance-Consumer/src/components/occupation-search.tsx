@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
+import { IQuoteInfo } from "../state/info/quote-slice";
 import { Autocomplete } from "devextreme-react/autocomplete";
 import CustomStore from "devextreme/data/custom_store";
 import { useDispatch } from "react-redux";
 import { updateQuote } from "../state/info/quote-slice";
-import { IWorkflowState, updateWorkflow } from "../state/info/workflow-slice";
-import React from "react";
+
 const occupationSearchStore = new CustomStore({
   key: "code",
   useDefaultSearch: true,
@@ -25,14 +25,13 @@ const occupationSearchStore = new CustomStore({
 });
 const OccupationSearch = () => {
   const dispatch = useDispatch();
-  const worklfow = useSelector(
-    (state: any) => state.workflow
-  ) as IWorkflowState;
+  const quote = useSelector((state: any) => state.quote) as IQuoteInfo;
   return (
     <>
       <Autocomplete
         className="m-10 overflow-hidden rounded-lg bg-white shadow h-20"
         placeholder="Your Occupation"
+        defaultValue={quote.OuccaptionTitle}
         dataSource={occupationSearchStore}
         onItemClick={(e: any) => {
           dispatch(updateQuote(e.itemData));

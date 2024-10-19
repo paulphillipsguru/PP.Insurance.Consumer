@@ -2,13 +2,11 @@ import BreadCumb from "./components/nav/bread-nav";
 import OccupationSearch from "./components/occupation-search";
 import QuoteInfo from "./components/quote-info";
 import NextButton from "./components/nav/next_button";
-import React from "react";
 function App() {
   return (
     <>
       <div className="container mx-auto  h-screen m-10">
         <BreadCumb />
-
         <div className="mx-auto w-full max-w-7xl grow lg:flex xl:px-2 m-10">
           {/* Left sidebar & main wrapper */}
           <div className="flex-1 xl:flex">

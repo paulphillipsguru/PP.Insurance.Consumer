@@ -7,21 +7,20 @@ using PP.Module.QuoteManager.Quotes.Commands;
 namespace PP.Module.QuoteManager.Quotes.Handlers
 {
 
-	public class StartQuoteHandler(DataContext dbContext) : IRequestHandler<StartQuoteCommand, string>
+	public class StartQuoteHandler(DataContext dbContext) : IRequestHandler<StartQuoteCommand, StartQuoteCommandResponse>
 	{
 		private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-		public async Task<string> Handle(StartQuoteCommand request, CancellationToken cancellationToken)
+		public async Task<StartQuoteCommandResponse> Handle(StartQuoteCommand request, CancellationToken cancellationToken)
 		{
+			//NOTE: We have to lock this process as we don't want duplicate quote references!
 			await _semaphore.WaitAsync(); // Acquire the lock
 			using var transaction = dbContext.Database.BeginTransaction();
 			try
-			{
-				
+			{				
 				Dictionary<string, int> sequenceCounters = [];
 				Dictionary<string, int> sequenceThresholds = [];
 
-
-				var seed = await dbContext.Seeds.Include(p => p.SeedSegmentSeeds).FirstAsync(p => p.SeedKey == request.SeedCode);
+				var seed = await dbContext.Seeds.Include(p => p.SeedSegmentSeeds).FirstAsync(p => p.SeedKey == request.SeedCode, cancellationToken);
 
 				foreach (var seq in seed.SeedSegmentSeeds)
 				{
@@ -30,6 +29,7 @@ namespace PP.Module.QuoteManager.Quotes.Handlers
 				}
 				var quoteNumberGen = new PolicyNumberGenerator(seed.Format, sequenceThresholds, ref sequenceCounters);
 				var qouteNumber = quoteNumberGen.GeneratePolicyNumber();
+				//Update the seed values for each segments
 				foreach (var seq in seed.SeedSegmentSeeds)
 				{
 					seq.SeedValue = sequenceCounters[seq.SeekCode];
@@ -38,20 +38,21 @@ namespace PP.Module.QuoteManager.Quotes.Handlers
 
 				var quote =new Quote() {  DateCreated = DateTime.UtcNow, QuoteRef= qouteNumber };
 				
-				await dbContext.Quote.AddAsync(quote);
+				await dbContext.Quote.AddAsync(quote, cancellationToken);
 
-				await dbContext.SaveChangesAsync();
+				await dbContext.SaveChangesAsync(cancellationToken);
 				
 
-				transaction.Commit();
-				return qouteNumber;
+				await transaction.CommitAsync(cancellationToken);
+
+				return new StartQuoteCommandResponse() { QuoteRef = qouteNumber };
 
 			}
 			catch(Exception ex)
 			{
-				transaction.Rollback();
-				//TO DO: HANDLE ERROR
-				return "";
+				await transaction.RollbackAsync(cancellationToken);
+				//TODO: HANDLE ERROR
+				throw;
 			}
 			finally
 			{

@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { IQuoteInfo } from "../state/info/quote-slice";
 const QuoteInfo = () => {
@@ -11,6 +10,13 @@ const QuoteInfo = () => {
         <div className="rounded-lg bg-gray-50 shadow-sm ring-1 ring-gray-900/5">
           <dl className="flex flex-wrap">
             <div className="flex-auto pl-6 pt-6">
+              <dt className="font-semibold leading-6 text-gray-900">
+                Quote Reference
+              </dt>
+              <dd className="mt-1 text-base leading-6 text-gray-900">
+                {occupationCode.QuoteRef}
+              </dd>
+
               <dt className="font-semibold leading-6 text-gray-900">
                 Your Occupation
               </dt>

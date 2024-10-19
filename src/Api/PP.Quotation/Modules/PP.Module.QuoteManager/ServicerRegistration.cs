@@ -30,11 +30,11 @@ public static class ServicerRegistration
 	public static WebApplication RegisterQuoteManagerEndPoints(this WebApplication app)
 	{
 
-		app.MapGet("/Quote/Start/{seedKey}", async (IMediator mediator, string seedKey,CancellationToken token) =>
+		app.MapGet("/Quote/Start/{seedCode}", async (IMediator mediator, string seedCode,CancellationToken token) =>
 		{		
 			try
 			{
-				var command = new StartQuoteCommand() { SeedCode  = seedKey };
+				var command = new StartQuoteCommand() { SeedCode  = seedCode };
 				var result = await mediator.Send(command, token);
 
 				return Results.Ok(result);
