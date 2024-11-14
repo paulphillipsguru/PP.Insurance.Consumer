@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import React from "react";
 import { IWorkflowState } from "../../state/info/workflow-slice";
 import { Button } from "devextreme-react";
 const NextButton = () => {
