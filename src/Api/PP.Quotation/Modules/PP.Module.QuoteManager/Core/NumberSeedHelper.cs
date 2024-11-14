@@ -3,8 +3,8 @@
 namespace PP.Module.QuoteManager.Core;
 public class PolicyNumberGenerator
 {
-	private Dictionary<string, int> sequenceCounters = new Dictionary<string, int>();
-	private readonly Dictionary<string, int> sequenceThresholds = new Dictionary<string, int>();
+	private Dictionary<string, int> sequenceCounters = new();
+	private readonly Dictionary<string, int> sequenceThresholds = new();
 	private readonly string format;
 
 	public PolicyNumberGenerator(string formula, Dictionary<string, int> thresholds,ref Dictionary<string,int> sequence)
@@ -73,10 +73,7 @@ public class PolicyNumberGenerator
 
 			// Replace the placeholder with the current counter value
 			input = input.Replace(seqKey, sequenceCounters[seqKey].ToString());
-		}
-
-		
-		
+		}				
 
 		return input;
 	}
